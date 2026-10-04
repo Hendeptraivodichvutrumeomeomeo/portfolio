@@ -727,6 +727,11 @@
   }
   function reveal(i, delay) {
     if (seen.has(i)) return;
+    // đang chiếu màn mở đầu (js/splash.js): đợi nó đóng rồi mới cho trang sống dậy
+    if (document.body.classList.contains("splash-on")) {
+      document.addEventListener("splashdone", () => reveal(i, 80), { once: true });
+      return;
+    }
     seen.add(i);
     if (reduceMotion) return;
     const el = pageEls[i], s = el.querySelector(".sheet");
