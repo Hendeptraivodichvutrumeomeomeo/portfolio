@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Đoàn Ngọc Long · Portfolio</title>
+  <meta name="description" content="Portfolio của Đoàn Ngọc Long, Video Editor, Motion Designer và Graphic Designer tại Đà Nẵng, trình bày theo phong cách catalogue Wheeler, Rawson & Co. trong Red Dead Redemption 2.">
+  <meta property="og:title" content="Đoàn Ngọc Long · Portfolio">
+  <meta property="og:description" content="Video Editor · Motion Designer · Graphic Designer, Đà Nẵng">
+  <meta property="og:image" content="assets/img/portrait.jpg">
+  <meta name="theme-color" content="#0d0b09">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23a8231d'/%3E%3Ccircle cx='32' cy='32' r='25' fill='none' stroke='%23e8e2d3' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='32' font-weight='bold' fill='%23e8e2d3' text-anchor='middle'%3E%26%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/hand-gothic-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/aleo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=12">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><img id="bgImg" alt=""></div>
+
+  <header class="topbar">
+    <button class="brand" data-go="0" aria-label="Về trang bìa">
+      <span class="brand-name">Ngoc Long <i>&amp;</i> Co.</span>
+      <span class="brand-sub">Catalogue · Edition Nº 2026</span>
+    </button>
+    <div class="topbar-title" id="sectionTitle">Trang bìa</div>
+    <div class="topbar-right">
+      <span class="counter"><b id="pageNo">01</b> / <span id="pageTotal">00</span></span>
+      <button class="sound" id="soundBtn" aria-pressed="true" title="Bật/tắt âm thanh lật trang">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <nav class="toc" id="toc" aria-label="Mục lục"></nav>
+
+    <section class="book-wrap">
+      <button class="turn turn-prev" data-act="prev" aria-label="Trang trước"><span>‹</span></button>
+      <div class="book" id="book" aria-live="polite"></div>
+      <button class="turn turn-next" data-act="next" aria-label="Trang sau"><span>›</span></button>
+    </section>
+
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </main>
+
+  <footer class="prompts" id="prompts">
+    <button data-act="prev"><kbd>Q</kbd><span>Trang trước</span></button>
+    <button data-act="next"><kbd>E</kbd><span>Trang sau</span></button>
+    <button data-act="play" id="promptPlay"><kbd>↵</kbd><span>Xem video</span></button>
+    <button data-act="zoom" id="promptZoom"><kbd>Z</kbd><span>Phóng to</span></button>
+    <button data-act="toc"><kbd>M</kbd><span>Mục lục</span></button>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-inner">
+      <div class="modal-head">
+        <h2 id="modalTitle"></h2>
+        <button class="modal-close" data-act="close"><kbd>Esc</kbd><span>Đóng</span></button>
+      </div>
+      <div class="modal-frame"><video id="modalVideo" controls playsinline preload="metadata"></video><iframe id="modalYt" title="Trình phát YouTube" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <p class="modal-meta" id="modalMeta"></p>
+      <a class="modal-full" id="modalFull" href="#" target="_blank" rel="noopener" hidden>Xem bản đầy đủ trên Google Drive ↗</a>
+    </div>
+  </div>
+
+  <script src="js/data.js?v=12"></script>
+  <script src="js/excerpts.js?v=12"></script>
+  <script src="js/app.js?v=12"></script>
+</body>
+</html>
