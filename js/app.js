@@ -308,7 +308,7 @@
       const d = p.dept;
       // mục có video ngang: một ảnh lớn; mục video dọc: dải 4 ảnh
       const lead = p.items[0];
-      const media = lead.orient === "h"
+      const media = lead.orient === "h" || aspect(lead) > 1 // video ngang (kể cả khổ LED) → một ảnh lớn
         ? `<button class="dept-band" data-go="${itemPage[lead.id]}" aria-label="${esc(lead.title)}"><img src="${poster(lead)}" alt=""><span>Nº 01 · ${esc(lead.title)}</span></button>`
         : `<div class="dept-gallery">${p.items.slice(0, 4).map((it, k) => `
             <button class="dg" data-go="${itemPage[it.id]}" style="--r:${[-4, 3, -2, 4][k]}deg;--ar:${aspect(it).toFixed(3)}" aria-label="${esc(it.title)}">
@@ -929,10 +929,31 @@
   // desktop: mỗi trang tự phóng chữ (hệ số --k) lớn nhất có thể mà vẫn vừa trang — trang thưa chữ to hơn, trang dày giữ nguyên
   const K_STEPS = [1.16, 1.12, 1.08, 1.04, 1];
   function fitSheet(s) {
-    if (isNarrow()) { s.style.removeProperty("--k"); return; }
+    const g = s.querySelector(".dept-gallery");
+    if (isNarrow()) { s.style.removeProperty("--k"); s.style.removeProperty("--gh"); return; }
+    const u = s.clientWidth / 100;
+    if (g) s.style.setProperty("--gh", `${24 * u}px`); // ưu tiên chữ trước, dải ảnh nhỏ nhất
     for (const k of K_STEPS) {
       s.style.setProperty("--k", k);
       if (s.scrollHeight <= s.clientHeight + 1) break;
+    }
+    // dải ảnh dọc ở trang mục: lớn dần tới khi lấp hết chỗ trống (giữ nguyên tỉ lệ ảnh, không cắt)
+    if (g) {
+      // polaroid xoay nghiêng nên cho dư 2% chiều ngang
+      const grow = () => {
+        for (let h = 64; h >= 24; h -= 2) {
+          s.style.setProperty("--gh", `${h * u}px`);
+          if (s.scrollHeight <= s.clientHeight + 1 && g.scrollWidth <= g.clientWidth * 1.02) return h;
+        }
+        return 24;
+      };
+      g.classList.remove("g3");
+      const h4 = grow();
+      // 4 ảnh dọc bị giới hạn bởi chiều ngang trang → nếu còn trống nhiều, thử 3 ảnh to hơn
+      if (g.children.length >= 4 && h4 < 44) {
+        g.classList.add("g3");
+        if (grow() <= h4 + 4) { g.classList.remove("g3"); grow(); }
+      }
     }
   }
   function fitText() {

@@ -10,6 +10,7 @@
 @font-face { font-family: "Aleo"; src: url("../assets/fonts/aleo.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Aleo"; src: url("../assets/fonts/aleo-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Aleo"; src: url("../assets/fonts/aleo-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Playfair"; src: url("../assets/fonts/playfair-semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
   color-scheme: dark;
@@ -366,7 +367,8 @@ kbd {
 .italic { font-style: italic; }
 .small { font-size: var(--fs-small); }
 .by { margin-top: calc(var(--u) * -.4) !important; text-align: right; font-family: var(--f-gothic); font-size: var(--fs-small); letter-spacing: .1em; text-transform: uppercase; }
-.lead { font-weight: 700; }
+/* đoạn dẫn đậm: Playfair Display rõ nét ở cỡ nhỏ (Aleo Bold bị nhoè, đậm nhạt không đều) */
+.lead { font-family: "Playfair", var(--f-body); font-weight: 600; letter-spacing: .005em; }
 .dropcap::first-letter {
   float: left;
   font-family: var(--f-display);
@@ -1278,10 +1280,13 @@ body.zoomed #promptZoom kbd { background: var(--rdr-red); border-color: var(--rd
 
   /* trang mở mục: ảnh lớn / dải ảnh giãn hết phần còn lại của trang */
   .sheet.dept .dept-band { flex: 1 1 0; display: flex; flex-direction: column; min-height: calc(var(--u) * 16); margin-top: calc(var(--u) * 2.4); }
-  .sheet.dept .dept-band img { flex: 1; min-height: 0; aspect-ratio: auto; height: auto; }
-  .sheet.dept .dept-gallery { flex: 1 1 0; min-height: calc(var(--u) * 16); align-items: stretch; margin: calc(var(--u) * 2.4) 0 0; }
-  .sheet.dept .dg { max-width: none; display: flex; flex-direction: column; min-height: 0; max-height: 100%; }
-  .sheet.dept .dg img { flex: 1; min-height: 0; height: auto; aspect-ratio: auto; object-fit: cover; }
+  /* ảnh hiện trọn (không cắt chữ trong thumbnail), phần dư là viền giấy của tấm bìa */
+  .sheet.dept .dept-band img { flex: 1; min-height: 0; aspect-ratio: auto; height: auto; object-fit: contain; }
+  /* dải ảnh dọc giữ đúng tỉ lệ gốc, canh giữa phần trống còn lại */
+  .sheet.dept .dept-gallery { margin: auto auto 0; padding-top: calc(var(--u) * 2.4); flex-wrap: nowrap; max-width: 100%; }
+  .sheet.dept .dg { flex: 0 0 auto; max-width: none; }
+  .sheet.dept .dept-gallery.g3 .dg:nth-child(n+4) { display: none; }
+  .sheet.dept .dg img { width: auto; height: var(--gh, calc(var(--u) * 32)); aspect-ratio: var(--ar); }
 
   /* trang danh sách chỉ 2 dự án: thẻ và video to hơn */
   .cards.two .card.h { --tw: calc(var(--u) * 38); }
