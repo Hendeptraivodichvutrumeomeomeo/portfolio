@@ -10,7 +10,7 @@
 @font-face { font-family: "Aleo"; src: url("../assets/fonts/aleo.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Aleo"; src: url("../assets/fonts/aleo-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Aleo"; src: url("../assets/fonts/aleo-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "Playfair"; src: url("../assets/fonts/playfair-semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Playfair"; src: url("../assets/fonts/playfair-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 
 :root {
   color-scheme: dark;
@@ -367,8 +367,9 @@ kbd {
 .italic { font-style: italic; }
 .small { font-size: var(--fs-small); }
 .by { margin-top: calc(var(--u) * -.4) !important; text-align: right; font-family: var(--f-gothic); font-size: var(--fs-small); letter-spacing: .1em; text-transform: uppercase; }
-/* đoạn dẫn đậm: Playfair Display rõ nét ở cỡ nhỏ (Aleo Bold bị nhoè, đậm nhạt không đều) */
-.lead { font-family: "Playfair", var(--f-body); font-weight: 600; letter-spacing: .005em; }
+/* đoạn dẫn: Playfair Display nghiêng, lớn hơn thân bài để tách hẳn (kiểu đoạn dẫn tạp chí cổ) */
+.lead { font-family: "Playfair", var(--f-body); font-style: italic; font-weight: 400; font-size: 1.14em; line-height: 1.42; }
+.lead.dropcap::first-letter { font-style: normal; }
 .dropcap::first-letter {
   float: left;
   font-family: var(--f-display);
