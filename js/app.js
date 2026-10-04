@@ -397,7 +397,7 @@
         ${topmarks}
         <p class="kicker">${esc(d.name)} · Danh sách ${p.parts > 1 ? `${p.part}/${p.parts}` : ""}</p>
         <h2 class="headline">${esc(d.name)} <span class="light">— ${esc(d.sub)}</span></h2>
-        <div class="cards">
+        <div class="cards${p.items.length === 2 ? " two" : ""}">
           ${p.items.map((it, k) => `
             <article class="card ${it.orient}${k % 2 ? " alt" : ""}" data-card="${esc(it.id)}">
               ${video(it, "small")}
@@ -753,6 +753,8 @@
       el.classList.remove("revealing");
       blocks.forEach((n) => n.classList.remove("rv"));
       const o = s.querySelector(".ink-oval"); if (o) o.remove();
+      fitSheet(s);      // hiệu ứng xong → canh cỡ chữ và nhãn "Cuộn xuống" theo bố cục thật
+      markOverflow(el);
     }, delay + 300 + Math.min(blocks.length, 24) * 60 + 3600);
   }
 
@@ -924,6 +926,27 @@
 
   /* ───────────── Khởi động ───────────── */
   const startSlug = location.hash.slice(1);
+  // desktop: mỗi trang tự phóng chữ (hệ số --k) lớn nhất có thể mà vẫn vừa trang — trang thưa chữ to hơn, trang dày giữ nguyên
+  const K_STEPS = [1.16, 1.12, 1.08, 1.04, 1];
+  function fitSheet(s) {
+    if (isNarrow()) { s.style.removeProperty("--k"); return; }
+    for (const k of K_STEPS) {
+      s.style.setProperty("--k", k);
+      if (s.scrollHeight <= s.clientHeight + 1) break;
+    }
+  }
+  function fitText() {
+    // trang đang chạy hiệu ứng mở (khối phóng to tạm thời) sẽ được canh lại khi hiệu ứng xong
+    $$(".sheet", book).forEach((s) => { if (!s.classList.contains("reveal")) fitSheet(s); });
+    markOverflow(pageEls[cur]);
+  }
+  let fitTimer = 0;
+  window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitText, 200); });
+  if (document.fonts) document.fonts.ready.then(fitText); else fitText();
+  // ảnh tải xong có thể đổi chiều cao trang → canh chữ và nhãn "Cuộn xuống" lại
+  window.addEventListener("load", fitText);
+  book.addEventListener("load", (e) => { if (e.target.tagName === "IMG") { clearTimeout(fitTimer); fitTimer = setTimeout(fitText, 150); } }, true);
+
   const start = slugToIndex(startSlug);
   go(start >= 0 ? start : 0, { instant: true, silent: true });
   if (itemById[startSlug]) selectCard(startSlug);
