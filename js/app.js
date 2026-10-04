@@ -164,10 +164,11 @@
     ? `<img class="yt-thumb" src="${poster(it)}" ${ytFallback(it.yt)} style="${style}" alt="" loading="lazy">`
     : `<video muted loop playsinline preload="none" style="${style}" data-src="${VIDEO_DIR}${esc(it.id)}-loop.mp4" poster="${poster(it)}"></video>`;
 
-  const video = (it, cls = "") => `
+  const video = (it, cls = "", cap = "") => `
     <figure class="illus ${cls}" data-play="${esc(it.id)}" tabindex="0" role="button" aria-label="Xem video ${esc(it.title)}">
       <span class="frame">${loopVideo(it, `aspect-ratio:${esc(ratioOf(it))}`)}</span>
       <span class="play-badge">▶ Xem video</span>
+      ${cap ? `<figcaption class="illus-no">${cap}</figcaption>` : ""}
     </figure>`;
 
 
@@ -355,7 +356,7 @@
           <p class="by">${esc(it.client)} — ${esc(it.year)}</p>
         </header>
         <div class="item-body">
-          ${video(it)}
+          ${video(it, "", `Hình minh hoạ số ${p.illus}.`)}
           <div class="copy">
             <p class="lead dropcap">${esc(it.lead)}</p>
             ${it.sections.map((s, i) => `${i ? '<div class="dots"></div>' : ""}<h3 class="sub">${esc(s.h)}</h3><p>${esc(s.p)}</p>`).join("")}
@@ -374,7 +375,7 @@
         <div class="specs">
           ${seal(it.year.slice(-4))}
           <div class="specs-body">
-            <p class="specs-title">Thông tin dự án <span>Hình minh hoạ số ${p.illus}</span></p>
+            <p class="specs-title">Thông tin dự án <span>Ngoc Long &amp; Co.</span></p>
             <dl>
               <div><dt>Khách hàng</dt><dd>${esc(it.client)}</dd></div>
               <div><dt>Thời gian</dt><dd>${esc(it.year)}</dd></div>
@@ -587,6 +588,13 @@
   const book = $("#book"), panel = $("#panel"), toc = $("#toc");
   book.innerHTML = pages.map((p, i) => `<article class="page page--${p.type}" data-i="${i}" aria-label="Trang ${i + 1}: ${esc(p.label)}">${tpl[p.type](p)}<span class="folio">${pad(i + 1)}</span></article>`).join("");
   const pageEls = $$(".page", book);
+  // viền hoa văn kiểu catalogue (css/borders.css): mỗi loại trang một kiểu, trang dự án xoay vòng
+  const BORDER = { about: "fleuron", record: "double", skills: "beads", index: "rope", dept: "zigzag", list: "teeth", clients: "rope", contact: "fleuron" };
+  const ITEM_BORDERS = ["double", "beads", "fleuron", "rope"];
+  pages.forEach((p, i) => {
+    const b = p.type === "item" ? ITEM_BORDERS[(p.illus - 1) % ITEM_BORDERS.length] : BORDER[p.type];
+    if (b) pageEls[i].querySelector(".sheet").dataset.border = b;
+  });
   $("#pageTotal").textContent = pad(pages.length);
 
   // mục lục bên trái: liệt kê từng dự án, trỏ tới trang chứa nó
@@ -927,7 +935,7 @@
   /* ───────────── Khởi động ───────────── */
   const startSlug = location.hash.slice(1);
   // desktop: mỗi trang tự phóng chữ (hệ số --k) lớn nhất có thể mà vẫn vừa trang — trang thưa chữ to hơn, trang dày giữ nguyên
-  const K_STEPS = [1.16, 1.12, 1.08, 1.04, 1];
+  const K_STEPS = [1.16, 1.12, 1.08, 1.04, 1, .96, .92]; // < 1 chỉ dùng khi màn thấp, trang quá dày
   function fitSheet(s) {
     const g = s.querySelector(".dept-gallery");
     if (isNarrow()) { s.style.removeProperty("--k"); s.style.removeProperty("--gh"); return; }

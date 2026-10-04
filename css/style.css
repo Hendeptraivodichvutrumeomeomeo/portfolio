@@ -1294,3 +1294,39 @@ body.zoomed #promptZoom kbd { background: var(--rdr-red); border-color: var(--rd
   .cards.two .card-title { font-size: calc(var(--u) * 3.3); }
 }
 
+
+/* ==========================================================================
+   HOẠ TIẾT CATALOGUE: viền hoa văn (css/borders.css), thanh tiêu đề nền đen,
+   băng khẩu hiệu đóng khung, chú thích "Hình minh hoạ số"
+   ========================================================================== */
+.sheet[data-border]::before {
+  inset: calc(var(--u) * 1.5);
+  border: calc(var(--u) * 3.4) solid transparent;
+  border-image-slice: 24;
+  border-image-repeat: round;
+  outline: 0;
+  opacity: .82;
+}
+.sheet[data-border] .topmarks { display: none; }
+.sheet[data-border], .sheet.dept[data-border], .sheet.about[data-border] { padding: calc(var(--u) * 6.6) calc(var(--u) * 7.4) calc(var(--u) * 6.4); }
+.sheet.dept[data-border]::after { display: none; }
+
+/* thanh tiêu đề nhỏ kiểu "VISIT OUR DRUGS DEPARTMENT" */
+.kicker { display: table; width: fit-content; align-self: flex-start; padding: calc(var(--u) * .45) calc(var(--u) * 1.2) calc(var(--u) * .3); border-top: 0; background: var(--ink); color: var(--paper); }
+
+/* băng khẩu hiệu đóng khung kiểu "OUR PRICES ARE NEVER BEATEN." */
+.list-foot, .xp-foot {
+  padding: calc(var(--u) * .9) calc(var(--u) * 1.6) calc(var(--u) * .7);
+  border: 2px solid var(--ink);
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink);
+  font-family: var(--f-gothic); font-style: normal; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; text-align: center;
+}
+
+/* chú thích dưới video trên trang dự án */
+.illus-no { margin-top: calc(var(--u) * .7); text-align: right; font-family: var(--f-body); font-style: italic; font-size: var(--fs-tiny); color: var(--ink-2); }
+
+@media (max-width: 899px) {
+  .sheet[data-border]::before { inset: 5px; border-width: 13px; }
+  .sheet[data-border], .sheet.dept[data-border], .sheet.about[data-border] { padding: 40px 26px 46px; }
+}
