@@ -43,6 +43,7 @@ window.CATALOGUE = {
     { when: "04/2024 — 01/2025", what: "Focus Event", where: "TVC Queen Kara, recap Big Bang Club, video quảng cáo karaoke và sự kiện" },
     { when: "05/2023 — 04/2025", what: "Kênh YouTube Teakill", where: "Hoạt hình giải thích khoa học, bảng xếp hạng, meme review" },
     { when: "11/2022 — 04/2023", what: "N2L Entertainment", where: "Video Editor & Graphic Designer: quản lý dự án video thế giới động vật kết hợp motion graphic" },
+    { when: "2022 — 2026", what: "Dự án cá nhân", where: "Phim ngắn Tết (SMP Production · ĐH FPT), kênh TikTok 3 con chos ghép meme vào 3D, kênh YouTube Long Baka" },
     { when: "09 — 10/2022", what: "Wemo Media", where: "Video Editor: hiệu ứng âm thanh, lồng tiếng phim hoạt hình" },
     { when: "2019 — 2021", what: "Câu lạc bộ sinh viên", where: "NYS Club, FTV Club, BaoLinh Project: dựng video và thiết kế" },
   ],
@@ -127,6 +128,19 @@ window.CATALOGUE = {
       stats: [85, 84, 80, 80, 90],
     },
     {
+      id: "pt1", dept: "lv", orient: "h", featured: true, yt: "xGhQBlGRSEs",
+      title: "Phim ngắn Tết 2022", client: "SMP Production · ĐH FPT", year: "01/2022", duration: "31:20",
+      role: "Dựng phim & hậu kỳ", tools: ["Premiere Pro", "After Effects"],
+      headline: "Một bộ phim ngắn về những ngày giáp Tết",
+      lead: "Phim ngắn 31 phút của SMP Production và Trường Đại học FPT: nhóm bạn trẻ xa nhà, những bữa ăn khuya và câu hỏi Tết này có về hay không.",
+      sections: [
+        { h: "Màu ấm cho một câu chuyện nhà", p: "Ánh đèn vàng ban đêm, phòng trọ chật và sân trường đầy nắng được cân màu ấm, giữ cảm giác hoài niệm suốt bộ phim." },
+        { h: "Nhịp kể của phim dài", p: "Hơn ba mươi phút thoại và cảnh đời thường, cắt theo cảm xúc nhân vật để người xem không bị hụt nhịp." },
+      ],
+      panel: "Phim ngắn 31 phút (SMP Production · ĐH FPT): kể chuyện đời thường, màu ấm hoài niệm.",
+      stats: [80, 90, 72, 84, 92],
+    },
+    {
       id: "lv3", dept: "lv", orient: "h",
       title: "Lợi Trần · Đại dương", client: "Kênh YouTube Lợi Trần", year: "07/2026", duration: "11:27",
       role: "Dựng & motion graphic", tools: ["Premiere Pro", "After Effects"],
@@ -160,6 +174,13 @@ window.CATALOGUE = {
       role: "Dựng & motion graphic", tools: ["Premiere Pro", "After Effects"],
       panel: "Demo 30 giây: tin tức thuế quan, bảng điều tra và cảnh dựng điện ảnh cho kênh bình luận.",
       stats: [86, 80, 86, 80, 82],
+    },
+    {
+      id: "th3", dept: "lv", orient: "h", yt: "OvqlCsIfNS0",
+      title: "MSTC · Talkshow hai người", client: "Kênh YouTube Long Baka", year: "01/2024", duration: "15:45",
+      role: "Dựng talkshow nhiều máy", tools: ["Premiere Pro"],
+      panel: "Talkshow 16 phút dựng từ nhiều máy quay: cắt theo người nói, chèn tư liệu minh hoạ đúng lúc.",
+      stats: [84, 78, 60, 82, 84],
     },
     /* ───────────── II. ANIMATION & FUN ───────────── */
     /* Kênh Vui Vẻ (2023 – 2025): video đăng trên YouTube, xem bằng trình phát nhúng */
@@ -336,6 +357,13 @@ window.CATALOGUE = {
       stats: [84, 88, 60, 80, 80],
     },
 
+    {
+      id: "fn10", dept: "fn", orient: "h", yt: "gny1Qy4nWjs",
+      title: "Thủy Hử · Hoạt hình kể chuyện", client: "Kênh YouTube Long Baka", year: "05/2024", duration: "12:50",
+      role: "Dựng & animation", tools: ["After Effects", "Premiere Pro"],
+      panel: "Hoạt hình 13 phút kể lại Thủy Hử: nhân vật chibi vẽ tay, bản đồ, câu thoại hài hước.",
+      stats: [84, 86, 88, 82, 90],
+    },
     /* ───────────── III. REACTION & REVIEW ───────────── */
     {
       id: "bm1", dept: "rv", orient: "h", featured: true, yt: "3BvXAp7U3cg", views: 559023,
@@ -412,6 +440,32 @@ window.CATALOGUE = {
       ],
       panel: "Short hoạt hình 43 giây: bối cảnh vẽ tay đổi theo lời kể, diễn hoạt biểu cảm, ghép mèo thật.",
       stats: [88, 84, 90, 84, 90],
+    },
+    {
+      id: "cc1", dept: "sv", orient: "v", featured: true, gallery: ["cc2", "cc3"],
+      title: "3 con chos · Ứng quá chừng", client: "Kênh TikTok 3 con chos", year: "03/2023", duration: "0:22",
+      role: "Ý tưởng, dựng & ghép 3D", tools: ["After Effects", "Premiere Pro"],
+      headline: "Chú chó Cheems trong thế giới 3D màu hồng",
+      lead: "Kênh TikTok cá nhân của tôi: meme Cheems được ghép vào bối cảnh 3D, nhảy theo nhạc, đóng vai bác sĩ hay ca sĩ đường phố.",
+      sections: [
+        { h: "Ghép meme vào không gian 3D", p: "Nhân vật 2D được đặt vào phòng 3D màu pastel, có ánh sáng, bóng đổ và chuyển động máy để trông như cùng một thế giới." },
+      ],
+      panel: "Video TikTok 22 giây: Cheems nhảy trong phòng 3D màu hồng, chuyển cảnh theo nhạc.",
+      stats: [86, 92, 88, 82, 80],
+    },
+    {
+      id: "cc2", dept: "sv", orient: "v", hidden: true,
+      title: "3 con chos · Đông kiếm em", client: "Kênh TikTok 3 con chos", year: "03/2023", duration: "0:45",
+      role: "Ý tưởng, dựng & ghép 3D", tools: ["After Effects", "Premiere Pro"],
+      panel: "Parody ca sĩ đường phố: Cheems ôm đàn, phụ đề lời bài hát.",
+      stats: [84, 84, 80, 86, 84],
+    },
+    {
+      id: "cc3", dept: "sv", orient: "v", hidden: true,
+      title: "3 con chos · Đi khám", client: "Kênh TikTok 3 con chos", year: "03/2023", duration: "0:33",
+      role: "Ý tưởng, dựng & ghép 3D", tools: ["After Effects", "Premiere Pro"],
+      panel: "Tiểu phẩm Cheems đi khám bác sĩ, có phần \"To be continued\".",
+      stats: [86, 80, 78, 82, 86],
     },
     {
       id: "a4", dept: "sv", orient: "v",

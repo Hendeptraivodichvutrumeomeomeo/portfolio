@@ -1331,3 +1331,8 @@ body.zoomed #promptZoom kbd { background: var(--rdr-red); border-color: var(--rd
   .sheet[data-border]::before { inset: 5px; border-width: 13px; }
   .sheet[data-border], .sheet.dept[data-border], .sheet.about[data-border] { padding: 40px 26px 46px; }
 }
+
+/* trang gom nhiều video DỌC (kênh 3 con chos): dải video phụ thu thấp, canh giữa */
+.item.v.has-gallery .gallery { grid-template-columns: repeat(var(--n, 3), auto); justify-content: center; gap: calc(var(--u) * 4); }
+.item.v.has-gallery .gal-img img { width: auto; height: calc(var(--u) * 17); }
+.item.v.has-gallery .gal figcaption { max-width: calc(var(--u) * 16); margin-left: auto; margin-right: auto; }
