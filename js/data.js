@@ -401,6 +401,19 @@ window.CATALOGUE = {
       stats: [80, 90, 88, 88, 82],
     },
     {
+      id: "sv9", dept: "sv", orient: "v", featured: true,
+      title: "Lợi Trần · Con mèo đẻ 5 con", client: "Kênh YouTube Lợi Trần", year: "10/2026", duration: "0:43",
+      role: "Dựng & animation", tools: ["After Effects", "Premiere Pro"],
+      headline: "Một câu chuyện kể bằng hoạt hình trong 40 giây",
+      lead: "Video ngắn hoạt hình cho kênh Lợi Trần: chú mèo đen có bầu, đẻ ra năm chú mèo con và một câu hỏi ngớ ngẩn về sáu cái núm vú.",
+      sections: [
+        { h: "Mỗi câu thoại một cảnh", p: "Phòng khách vẽ tay, màn hình gọi video, bông hoa khổng lồ và cảnh ghép mèo thật: bối cảnh đổi liên tục theo lời kể để giữ nhịp cho khung dọc." },
+        { h: "Nhân vật có biểu cảm", p: "Nhân vật áo xanh và đàn mèo được diễn hoạt bằng biểu cảm phóng đại, phụ đề đặt giữa khung đúng vùng an toàn của Shorts và Reels." },
+      ],
+      panel: "Short hoạt hình 43 giây: bối cảnh vẽ tay đổi theo lời kể, diễn hoạt biểu cảm, ghép mèo thật.",
+      stats: [88, 84, 90, 84, 90],
+    },
+    {
       id: "a4", dept: "sv", orient: "v",
       title: "Manzoku Izakaya · Spot", client: "Manzoku Izakaya", year: "07/2026", duration: "0:17",
       role: "Dựng & chữ động", tools: ["Premiere Pro", "After Effects"],
