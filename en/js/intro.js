@@ -24,12 +24,15 @@
       <div class="boot-bar"><i></i></div>
       <p class="boot-press"><span class="boot-loading">Loading intro…</span><span class="boot-ready"><kbd>Press any key</kbd> or tap to start <small>sound on</small></span></p>
     </div>
-    <video class="boot-video" src="media/intro.mp4" playsinline preload="auto"></video>
+    <video class="boot-video" playsinline webkit-playsinline preload="auto"></video>
     <button class="boot-skip" type="button">Skip ▸</button>`;
   document.body.classList.add("boot-on");
   document.body.prepend(el);
 
   const v = el.querySelector(".boot-video"), bar = el.querySelector(".boot-bar i");
+  // điện thoại / màn nhỏ: bản 720p nhẹ (~4 MB) thay vì bản 1080p (~14 MB)
+  const small = matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+  v.src = small ? "media/intro-m.mp4" : "media/intro.mp4";
   // thanh tải theo phần video đã tải về; đủ để chạy mượt (hoặc sau 4 s) thì cho bấm
   const progress = () => {
     if (!v.duration || !v.buffered.length) return;
@@ -48,8 +51,11 @@
     started = true;
     el.classList.add("is-playing");
     v.muted = false;
-    v.play().catch(() => { v.muted = true; v.play().catch(finish); });   // nếu vẫn bị chặn tiếng thì phát không tiếng
+    // play() phải gọi ngay trong cú chạm thì điện thoại mới cho phát có tiếng
+    const p = v.play();
+    if (p) p.catch(() => { v.muted = true; v.play().catch(finish); });   // nếu vẫn bị chặn tiếng thì phát không tiếng
   };
+  v.addEventListener("playing", () => el.classList.add("is-rolling"));   // hình đã chạy: tắt chữ "Loading"
   function finish() {
     if (closing) return;
     closing = true;
@@ -64,7 +70,10 @@
     if (!started) start(e); else if (e.key === "Escape" || e.key === "Enter" || e.key === " ") { e.preventDefault(); finish(); }
   }
   document.addEventListener("keydown", onKey, true);
-  el.addEventListener("click", (e) => { if (!e.target.closest(".boot-skip")) start(e); });   // bấm/chạm bất kỳ đâu trên màn chờ
+  // bấm/chạm bất kỳ đâu trên màn chờ: bắt cả touchend (điện thoại) lẫn click (chuột)
+  const tap = (e) => { if (!e.target.closest(".boot-skip")) start(e); };
+  el.addEventListener("touchend", tap, { passive: false });
+  el.addEventListener("click", tap);
   el.querySelector(".boot-skip").addEventListener("click", (e) => { e.stopPropagation(); finish(); });
   v.addEventListener("ended", finish);
 })();
