@@ -64,7 +64,7 @@
     if (!started) start(e); else if (e.key === "Escape" || e.key === "Enter" || e.key === " ") { e.preventDefault(); finish(); }
   }
   document.addEventListener("keydown", onKey, true);
-  el.querySelector(".boot-wait").addEventListener("click", start);
+  el.addEventListener("click", (e) => { if (!e.target.closest(".boot-skip")) start(e); });   // bấm/chạm bất kỳ đâu trên màn chờ
   el.querySelector(".boot-skip").addEventListener("click", (e) => { e.stopPropagation(); finish(); });
   v.addEventListener("ended", finish);
 })();
