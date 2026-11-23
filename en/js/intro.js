@@ -30,9 +30,10 @@
   document.body.prepend(el);
 
   const v = el.querySelector(".boot-video"), bar = el.querySelector(".boot-bar i");
-  // điện thoại / màn nhỏ: bản 720p nhẹ (~4 MB) thay vì bản 1080p (~14 MB)
+  // màn dọc (điện thoại cầm dọc): bản intro DỌC xếp lại bố cục; màn nhỏ nằm ngang: bản 720p nhẹ; máy tính: bản 1080p
+  const portrait = matchMedia("(orientation: portrait)").matches;
   const small = matchMedia("(max-width: 900px), (pointer: coarse)").matches;
-  v.src = small ? "media/intro-m.mp4" : "media/intro.mp4";
+  v.src = portrait ? "media/intro-v.mp4" : small ? "media/intro-m.mp4" : "media/intro.mp4";
   // thanh tải theo phần video đã tải về; đủ để chạy mượt (hoặc sau 4 s) thì cho bấm
   const progress = () => {
     if (!v.duration || !v.buffered.length) return;

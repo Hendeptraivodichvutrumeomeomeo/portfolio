@@ -341,7 +341,6 @@ body.boot-on { overflow: hidden; }
 .boot-loading { opacity: .7; }
 .boot-video { pointer-events: none; position: absolute; inset: 0;   /* video nằm trên màn chờ: không được nuốt cú bấm "tap to start" */ width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s; }
 .boot.is-playing .boot-video { opacity: 1; }
-@media (max-aspect-ratio: 1/1) { .boot-video { object-fit: contain; } }
 .boot-skip { position: absolute; right: clamp(14px, 3vw, 36px); bottom: clamp(14px, 3vw, 36px); z-index: 2; padding: .65em 1.3em; border-radius: 999px; border: 0; background: var(--lime); color: var(--ink); font: 800 .95rem/1 var(--body); opacity: 0; transition: opacity .4s; }
 .boot.is-playing .boot-skip { opacity: 1; }
 
